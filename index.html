@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+
+    <style>
+        html{
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-image: linear-gradient(240deg, #6c7beae8 0%, #1b2f74 100%);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, .menu a {
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        p {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            justify-content: end;
+        }
+
+        header {
+            background-color: rgb(4, 4, 67);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        header .sottotitolo{
+            font-size: 18px;
+            margin-top: 5px;
+        }
+
+        footer {
+            background-color: rgb(4, 4, 67);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .menu {
+            background-color: rgb(17, 17, 103);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: whitesmoke;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .menu a:hover {
+            background-color: rgba(137, 161, 225, 0.3);
+            color: #cbd5ff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .main {
+            padding: 40px 20px 100px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            color: white;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .container:hover{
+            background-color: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+        }
+
+        section{
+            scroll-margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lo strato di trasporto e i suoi protocolli</h1>
+        <p class="sottotitolo">Analisi e confronto tra TCP<i>(Transmission Control Protocol)</i> e UDP<i>(User Datagram Protocol)</i></p>
+    </header>
+
+    <nav class="menu">
+        <ul>
+            <li><a href="#strato-di-trasporto">Lo strato di trasporto</a></li>
+            <li><a href="#udp">Il Protocollo UDP</a></li>
+            <li><a href="#trasferimento-affidabile">Trasferimento Affidabile</a></li>
+            <li><a href="#tcp">Il Protocollo TCP</a></li>
+            <li><a href="#problem-tcp">Connessione e Congestione</a></li>
+        </ul> 
+    </nav>
+
+    <div class="main">
+        <div class="container">
+            <section id="strato-di-trasporto">
+                <h2>Lo Strato di Trasporto: Comunicazione Logica End-to-End</h2>
+                <p>Nel modello architetturale ISO/OSI e nello stack TCP/IP, il livello di trasporto (Layer 4) rappresenta il fulcro che separa l'infrastruttura di rete dalle applicazioni dell'utente. Mentre il livello di rete sottostante (livello IP) si preoccupa esclusivamente di far viaggiare i pacchetti da un host all'altro (host-to-host), lo strato di trasporto eleva questo concetto garantendo una comunicazione logica diretta tra i singoli processi applicativi in esecuzione sui dispositivi periferici (process-to-process).</p>
+                <p>Questa separazione dei flussi dati avviene attraverso i meccanismi di <strong>multiplexing</strong> in trasmissione e <strong>demultiplexing</strong> in ricezione. Il sistema operativo riesce a smistare i pacchetti alle corrette applicazioni grazie all'introduzione del concetto di <strong>Porta</strong> (un identificatore a 16 bit). L'unione tra l'indirizzo IP della macchina e il numero di porta costituisce il <strong>Socket</strong>, che identifica in modo univoco l'endpoint della comunicazione, permettendo, ad esempio, a un server web di gestire simultaneamente centinaia di richieste senza confondere i dati di un client con quelli di un altro.</p>
+                <p>Il livello di trasporto incapsula i dati provenienti dal livello applicativo in unità chiamate <strong>Segmenti</strong> (nel caso del TCP) o <strong>Datagrammi</strong> (nel caso dell'UDP). Questa <strong>PDU</strong> <i>(Protocol Data Unit)</i> contiene le informazioni necessarie per realizzare un canale di comunicazione che può essere di due tipi: un servizio orientato alla connessione, che simula un circuito fisico dedicato con garanzia di consegna, o un servizio non orientato alla connessione, che privilegia l'efficienza pura trattando ogni pacchetto come un'entità indipendente.</p>
+            </section>
+        </div>
+
+        <div class="container">
+            <section id="udp">
+                <h2>UDP: Il Paradigma Connectionless</h2>
+                <p>Il protocollo UDP (User Datagram Protocol) offre un servizio di trasporto minimale, definito in ambito sistemistico come <em>best-effort</em>. È un protocollo privo di stato e non orientato alla connessione: ciò significa che il mittente inietta i propri segmenti (chiamati datagrammi) nella rete senza alcun preavviso al destinatario, eliminando totalmente il ritardo iniziale dovuto all'instaurazione di una sessione.</p>
+                <p>La sua architettura è progettata per la massima efficienza e velocità. L'intestazione (header) di un pacchetto UDP occupa solamente 8 byte, contenendo esclusivamente le porte di origine e destinazione, la lunghezza del datagramma e un <strong>Checksum</strong> opzionale per il controllo basilare degli errori di bit. L'UDP non implementa meccanismi di riscontro, non riordina i pacchetti giunti a destinazione fuori sequenza e non adatta la propria velocità di trasmissione alle condizioni della rete. Questa apparente inaffidabilità lo rende in realtà lo strumento d'elezione per tutte le applicazioni <em>real-time</em>, come lo streaming multimediale, il VoIP e il DNS, dove la tempestività della consegna è un requisito molto più stringente rispetto all'integrità assoluta del dato.</p>
+            </section>
+        </div>
+
+        <div class="container">
+            <section id="trasferimento-affidabile">
+                <h2>I Principi del Trasferimento Affidabile</h2>
+                <p>Sviluppare un protocollo di trasporto affidabile al di sopra di un livello di rete (come l'IP) che per natura scarta, duplica o corrompe i pacchetti, è una delle sfide ingegneristiche più complesse delle reti di calcolatori. Il trasferimento affidabile dei dati (RDT) richiede l'implementazione di logiche rigorose basate su un costante scambio di feedback tra le due entità comunicanti.</p>
+                <p>Per trasformare un canale inaffidabile in uno sicuro, il protocollo deve dotare ogni segmento di un <strong>Numero di Sequenza</strong> (Sequence Number), permettendo al ricevente di individuare pacchetti mancanti o di riordinare quelli arrivati sfalsati. A questo si aggiunge la necessità di messaggi di controllo, i cosiddetti <strong>Acknowledgment (ACK)</strong>, che il destinatario invia per confermare l'avvenuta e corretta ricezione. Se il mittente non riceve un ACK entro una specifica finestra temporale, gestita da un <strong>Timer di ritrasmissione</strong>, presume che il pacchetto o il riscontro siano andati persi e procede automaticamente a un nuovo invio del dato, garantendo che nessun bit venga definitivamente smarrito nel canale di comunicazione.</p>
+            </section>
+        </div>
+        
+        <div class="container">
+            <section id="tcp">
+                <h2>TCP: Architettura Orientata alla Connessione</h2>
+                <p>Il Transmission Control Protocol (TCP) è la risposta sistemistica all'esigenza di una comunicazione robusta, garantita e <em>full-duplex</em>. Prima che qualsiasi dato applicativo venga trasferito, il TCP esige la creazione di un circuito virtuale dedicato attraverso una procedura definita <strong>Three-Way Handshake</strong>. Questo negoziato iniziale prevede lo scambio di segmenti di controllo (con i flag SYN e ACK attivati) attraverso i quali client e server sincronizzano i propri numeri di sequenza iniziali e allocano le risorse di memoria necessarie (i buffer) per gestire la sessione.</p>
+                <p>Una volta stabilita la connessione, il TCP incapsula i dati in segmenti complessi, con un header di base di 20 byte. Ogni byte trasmesso è numerato e rigorosamente tracciato. A differenza dell'UDP, se il TCP rileva un errore di checksum o un buco nella numerazione di sequenza, il dato non viene consegnato allo strato applicativo, ma trattenuto nel buffer di ricezione finché la porzione mancante non viene ritrasmessa con successo, assicurando che l'applicazione finale legga esattamente un flusso di byte identico a quello generato dalla sorgente.</p>
+            </section>
+        </div>
+
+        <div class="container">
+            <section id="problem-tcp">
+                <h2>Dinamiche Avanzate: Problematiche di Connessione e Congestione</h2>
+                <p>L'affidabilità del TCP non si limita all'avvio della sessione, ma richiede la gestione continua degli imprevisti di connessione e l'adattamento dinamico allo stato della rete. Una prima problematica è la saturazione del destinatario: per evitare che un mittente troppo veloce riempia i buffer di un host più lento, il TCP implementa il <strong>Controllo di Flusso</strong>. Attraverso il parametro <em>Receive Window (rwnd)</em> contenuto nell'header, il ricevente comunica in tempo reale lo spazio libero nella propria memoria, modulando di fatto il rateo di trasmissione del mittente.</p>
+                <p>Quando un pacchetto si perde nel canale, la connessione subisce una criticità. Il TCP rileva l'errore principalmente tramite il <strong>Timeout di Ritrasmissione (RTO)</strong>: se scade il timer senza aver ricevuto conferma, il mittente deduce la perdita e ritrasmette il segmento. Tuttavia, attendere la scadenza del timer è inefficiente. Per questo il protocollo utilizza l'algoritmo di <strong>Fast Retransmit (Ritrasmissione Rapida)</strong>: se il mittente riceve tre <em>ACK duplicati</em> consecutivi per lo stesso pacchetto, capisce immediatamente che si è verificato un "buco" nella sequenza e invia subito il segmento mancante, abbattendo drasticamente i tempi morti della connessione.</p>
+                <p>Ancora più complessa è la <strong>Gestione della Congestione</strong>, essenziale per prevenire il collasso dell'intera infrastruttura di rete. Se i router intermedi si sovraccaricano e scartano pacchetti, il TCP interpreta la perdita come un sintomo di saturazione fisica e interviene modificando la sua <em>Congestion Window (cwnd)</em>. La trasmissione inizia con la fase di <strong>Slow Start</strong>, durante la quale la velocità cresce in modo esponenziale per sondare rapidamente la capacità della rete. Raggiunta una soglia limite, subentra l'algoritmo <strong>AIMD</strong> (Additive Increase, Multiplicative Decrease): la velocità viene incrementata in modo lineare e cauto, ma, al primo segnale di perdita, viene dimezzata istantaneamente. Questa frenata drastica permette ai router intasati di svuotare le proprie code e ristabilire l'equilibrio.</p>
+                <p>Infine, anche il termine della comunicazione presenta delle problematiche: scollegarsi improvvisamente lascerebbe risorse allocate inutilmente sui router o sui server. Per risolvere questo problema, il TCP gestisce la chiusura della sessione attraverso un <strong>Four-Way Handshake</strong>. Utilizzando i flag FIN (Finish) e ACK, client e server si accordano per chiudere i rispettivi canali in modo indipendente, garantendo che tutti i dati in transito vengano consegnati prima di liberare definitivamente i socket e la memoria.</p>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <p><i>A cura di Mattia Mungari</i> - <strong>Lo strato di trasporto e i suoi protocolli</strong> - <i>2026</i></p>
+    </footer>
+</body>
+</html> 
